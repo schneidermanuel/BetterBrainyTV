@@ -108,7 +108,7 @@ function include_keyword_replacement() {
             "VoteNay": "❌",
             "VoteYea": "⭕",
             "WutFace": "😧",
-            "WutMon": "🙀"
+            "WutMon": "🙀",
         };
 
         var emotePattern = new RegExp(Object.keys(emote_map).join("|"));
