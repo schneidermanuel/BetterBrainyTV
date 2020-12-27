@@ -2,5 +2,9 @@
   "name": "Better YT Emotes XS",
   "version": "1.0",
   "description": "Enables Better YT Emotes in Livechat and Premieres.",
+  "background": {
+  "scripts": ["bytex.js"],
+  "persistent": true,
+  },
   "manifest_version": 3
 }
