@@ -19,21 +19,9 @@
         "lib/jquery-3.2.1.min.js",
         "lib/push.js",
         "constants.js",
-        "util.js",
         "YouTubeLive.js",
 		"bytex.js",
-        "default_settings.js",
-        "colored_names.js",
-        "better_mention_highlight.js",
-        "better_separate_messages.js",
-        "pinnable_mentions.js",
-        "push_notifications.js",
-        "sound_notifications.js",
-        "chat_filter.js",
-        "user_filters.js",
-        "keyword_replacement.js",
-        "beansplan.js",
-        "entry.js"
+        "default_settings.js"
       ],
       "run_at": "document_idle",
       "all_frames": true

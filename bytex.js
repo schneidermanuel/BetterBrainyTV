@@ -17,7 +17,7 @@ function loaded(youtubelive) {
                 let id = message.id.toString();
                 document.getElementById(id).getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML = text;
 
-            }, 1000);
+            }, 3000);
         }, true);
     }
 }
