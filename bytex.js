@@ -5,7 +5,7 @@ function LoadStreamerName() {
 }
 
 function loaded(youtubelive) {
-    if (window.location.href.includes("https://www.youtube.com/live_chat?is_popout=1")) {
+    if (window.location.href.includes("https://studio.youtube.com/live_chat?is_popout=1")) {
         var style = document.createElement('style');
         style.innerHTML =
             '@import url("https://fonts.googleapis.com/css?family=Changa One");\n' +
