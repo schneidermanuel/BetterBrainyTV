@@ -264,10 +264,17 @@ function loaded(youtubelive) {
             newtext = newtext.replaceAll("huebiPls", "<img src=https://cdn.betterttv.net/emote/60087c62f4d51165fed896b4/1x >");
 
             document.getElementById(id).getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML = newtext;
+            newtext = newtext + ".";
+            if (authorName !== ownUserName)
+            {
+                return;
+            }
             let handler = function () {
                 let id = message.id.toString();
                 let diaplayed = document.getElementById(id).getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML;
-                if (diaplayed === newtext) {
+                console.log("displayed: " + diaplayed);
+                console.log("New " + newtext);
+                if (diaplayed === newtext && diaplayed !== "") {
                     return false;
                 }
                 document.getElementById(id).getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML = newtext;
@@ -276,8 +283,10 @@ function loaded(youtubelive) {
             if (authorName === ownUserName && newtext !== text) {
                 console.log("Changing");
                 let changeDisplayed = function () {
-                    handler();
-                    window.setTimeout(changeDisplayed, 100);
+                    let result = handler();
+                    if (result) {
+                        window.setTimeout(changeDisplayed, 100);
+                    }
                 }
                 changeDisplayed();
             }
