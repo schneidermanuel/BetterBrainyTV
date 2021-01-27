@@ -261,7 +261,7 @@ function loaded(youtubelive) {
             let authorName = innerElement[1].innerText;
 
             let newtext = text.replaceAll("TestEmote", "<img src=https://cdn.betterttv.net/emote/5f1b0186cf6d2144653d2970/1x >");
-            newtext = text.replaceAll("HuebiPls", "<img src=https://cdn.betterttv.net/emote/60087c62f4d51165fed896b4/1x >");
+            newtext = newtext.replaceAll("huebiPls", "<img src=https://cdn.betterttv.net/emote/60087c62f4d51165fed896b4/1x >");
 
             document.getElementById(id).getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML = newtext;
             let handler = function () {
