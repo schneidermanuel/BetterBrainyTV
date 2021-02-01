@@ -270,7 +270,6 @@ function loaded(youtubelive) {
                 newtext = newtext.replaceAll(emote.EmoteName, "<img src=" + emote.EmoteHref + " >");
 
             })
-            newtext = newtext.replaceAll("huebiPls", "<img src=https://cdn.betterttv.net/emote/60087c62f4d51165fed896b4/1x >");
 
             document.getElementById(id).getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML = newtext;
 
