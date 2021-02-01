@@ -28,7 +28,10 @@
     }
   ],
   "web_accessible_resources": ["sounds/*", "img/*", "css/*"],
-  "permissions": ["storage"],
+  "permissions": [
+  "storage",
+  "https://build.brainyxs.com/*"
+  ],
   "options_ui": {
     "page": "options.html",
     "chrome_style": true
