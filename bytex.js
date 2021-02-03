@@ -1,9 +1,13 @@
 let emotes;
 var xmlHttp = new XMLHttpRequest();
-xmlHttp.open( "GET", "https://build.brainyxs.com/bbtv/streamer-dashboard/api.php", false ); // false for synchronous request
+xmlHttp.open( "GET", "https://build.brainyxs.com/bbtv/streamer-dashboard/api.php", true ); // false for synchronous request
+xmlHttp.onload = function(e)
+{
+    emotes = JSON.parse(xmlHttp.responseText);
+    console.log(emotes);
+}
 xmlHttp.send( );
-emotes = JSON.parse(xmlHttp.responseText);
-console.log(emotes);
+
 
 
 
@@ -270,7 +274,6 @@ function loaded(youtubelive) {
                 newtext = newtext.replaceAll(emote.EmoteName, "<img src=" + emote.EmoteHref + " >");
 
             })
-            newtext = newtext.replaceAll("huebiPls", "<img src=https://cdn.betterttv.net/emote/60087c62f4d51165fed896b4/1x >");
 
             document.getElementById(id).getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML = newtext;
 
