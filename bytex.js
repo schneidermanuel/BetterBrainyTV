@@ -1,15 +1,9 @@
 let emotes;
 var xmlHttp = new XMLHttpRequest();
-xmlHttp.open( "GET", "https://build.brainyxs.com/bbtv/streamer-dashboard/api.php", true ); // false for synchronous request
-xmlHttp.onload = function(e)
-{
-    emotes = JSON.parse(xmlHttp.responseText);
-    console.log(emotes);
-}
-xmlHttp.send( );
-
-
-
+xmlHttp.open("GET", "https://build.brainyxs.com/bbtv/streamer-dashboard/api.php", false); // false for synchronous request
+xmlHttp.send();
+emotes = JSON.parse(xmlHttp.responseText);
+console.log(emotes);
 
 function loaded(youtubelive) {
     console.log("loaded");
@@ -246,8 +240,8 @@ function loaded(youtubelive) {
             '{\n' +
             '  display: none;\n' +
             '}\n' +
-            '* { background-color: green; }' +
-            '/* https://streamlabs.com/widgets/chat-box/v1/11425BC5CAE02A8EC4DE */'
+            '* { background-color: green; }\n' +
+            'yt-live-chat-moderation-message-renderer, .yt-live-chat-moderation-message-renderer { display: none !important; }\n';
 
         var ref = document.querySelector('script');
 
@@ -256,7 +250,8 @@ function loaded(youtubelive) {
     if (youtubelive instanceof YouTubeLive) {
 
         console.log("started");
-        const ownUserName = $(".yt-live-chat-message-input-renderer #author-name").text();
+        const ownUserName = $(".yt-live-chat-message-input-renderer #author-name")
+            .text();
         youtubelive.registerChatMessageObserver(function (message) {
             let id = message.id.toString();
             let element = document.getElementById(id);
@@ -274,38 +269,39 @@ function loaded(youtubelive) {
                 newtext = newtext.replaceAll(emote.EmoteName, "<img src=" + emote.EmoteHref + " >");
 
             })
+            newtext = newtext.replaceAll("huebiPls", "<img src=https://cdn.betterttv.net/emote/60087c62f4d51165fed896b4/1x >");
 
-            document.getElementById(id).getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML = newtext;
+            document.getElementById(id)
+                .getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML = newtext;
 
-            if (text === newtext)
-            {
+            if (text === newtext) {
                 return;
             }
             if (authorName !== ownUserName) {
                 return;
             }
             let otext = newtext;
-            let hasChanged = false;
             let count = 0;
             let handler = function () {
                 let id = message.id.toString();
-                let diaplayed = document.getElementById(id).getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML;
+                let diaplayed = document.getElementById(id)
+                    .getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML;
                 console.log("displayed: " + diaplayed);
                 console.log("New " + newtext);
                 count++;
                 if (diaplayed === newtext) {
                     return false;
                 }
-                document.getElementById(id).getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML = otext;
+                document.getElementById(id)
+                    .getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML = otext;
                 return true;
-                hasChanged = true;
             };
             if (authorName === ownUserName && newtext !== text) {
                 console.log("Changing");
 
                 let changeDisplayed = function () {
                     let result = handler();
-                    if (result && !hasChanged && count < 100) {
+                    if (result) {
                         window.setTimeout(changeDisplayed, 100);
                     }
                 }

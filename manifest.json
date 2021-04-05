@@ -1,9 +1,9 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Better Brainy TV",
   "description": "",
   "default_locale": "de",
-  "version": "1.0",
+  "version": "2.2",
   "icons": {
     "128": "icon_128.png"
   },
@@ -27,13 +27,13 @@
       "all_frames": true
     }
   ],
-  "web_accessible_resources": ["sounds/*", "img/*", "css/*"],
   "permissions": [
-  "storage",
+  "storage"
+  ],
+  "host_permissions": [  
   "https://build.brainyxs.com/*"
   ],
-  "options_ui": {
-    "page": "options.html",
-    "chrome_style": true
+  "action": {
+    "default_popup": "emotes.html"
   }
-}
+ }
