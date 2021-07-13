@@ -7,11 +7,10 @@ console.log(emotes);
 
 function loaded(youtubelive) {
     console.log("loaded");
-    if (window.location.href.includes("https://studio.youtube.com/live_chat?is_popout=1")) {
+    if (window.location.href.includes("https://studio.youtube.com/live_chat?is_popout=1") && !window.location.href.includes("mode=nogreen")) {
         var style = document.createElement('style');
 
-        style.innerHTML =
-            '@import url("https://fonts.googleapis.com/css?family=Changa One");\n' +
+        style.innerHTML = '@import url("https://fonts.googleapis.com/css?family=Changa One");\n' +
             '@import url("https://fonts.googleapis.com/css?family=Imprima");\n' +
             '\n' +
             '/* Background colors*/\n' +
@@ -57,7 +56,7 @@ function loaded(youtubelive) {
             '\n' +
             'yt-live-chat-text-message-renderer #content,\n' +
             'yt-live-chat-legacy-paid-message-renderer #content {\n' +
-            '  overflow: initial; !important\n' +
+            '  overflow: initial !important;\n' +
             '}\n' +
             '\n' +
             '/* Hide scrollbar. */\n' +
@@ -226,22 +225,12 @@ function loaded(youtubelive) {
             '  display: none !important;\n' +
             '}\n' +
             '\n' +
-            '@keyframes anim {\n' +
-            '0% { opacity: 0; transform: translateX(-16px); }\n' +
-            '100% { opacity: 1; transform: none;}\n' +
-            '}\n' +
-            '\n' +
-            'yt-live-chat-text-message-renderer,\n' +
-            'yt-live-chat-legacy-paid-message-renderer {\n' +
-            '  animation: anim 200ms;\n' +
-            '  animation-fill-mode: both;\n' +
-            '}\n' +
-            '.yt-live-chat-banner-manager\n' +
-            '{\n' +
-            '  display: none;\n' +
-            '}\n' +
-            '* { background-color: green; }\n' +
-            'yt-live-chat-moderation-message-renderer, .yt-live-chat-moderation-message-renderer { display: none !important; }\n';
+            'yt-live-chat-banner-manager {\n' +
+            '  display: none !important;\n' +
+            '}\n' + '* { background-color: green; }\n' +
+            'yt-live-chat-auto-mod-message-renderer, yt-live-chat-moderation-message-renderer, .yt-live-chat-moderation-message-renderer { display: none !important; }\n' +
+            '.mention { background-color: transparent !important }';;
+            
 
         var ref = document.querySelector('script');
 
@@ -266,10 +255,9 @@ function loaded(youtubelive) {
             let newtext = text;
             emotes.forEach(emote => {
                 console.log(emote);
-                newtext = newtext.replaceAll(emote.EmoteName, "<img src=" + emote.EmoteHref + " >");
+                newtext = newtext.replace(new RegExp(emote.EmoteName, "g"), "<img src=" + emote.EmoteHref + " >");
 
             })
-            newtext = newtext.replaceAll("huebiPls", "<img src=https://cdn.betterttv.net/emote/60087c62f4d51165fed896b4/1x >");
 
             document.getElementById(id)
                 .getElementsByTagName("div")[0].getElementsByClassName("yt-live-chat-text-message-renderer")[2].innerHTML = newtext;
